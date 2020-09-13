@@ -4,6 +4,11 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Jumbled_API</RootNamespace>
   </PropertyGroup>
-
+  
+  <ItemGroup>
+    <Content Include="Resources\*">
+      <CopyToPublishDirectory>always</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 
 </Project>
