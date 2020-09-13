@@ -18,11 +18,12 @@ namespace Jumbled_API.Controllers
         [HttpGet]
         public IActionResult Get(string word)
         {
-            if (string.IsNullOrEmpty(word))
+            if (string.IsNullOrEmpty(word)) 
             {
                 return BadRequest();
             }    
-            return Ok(new Jumbled().GetDictionaryWords(word));
+            // return Ok(new Jumbled().GetDictionaryWords(word));
+            return Ok("Hello World")
         }
     }
 }
