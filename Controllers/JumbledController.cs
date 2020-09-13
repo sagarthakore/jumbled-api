@@ -22,8 +22,7 @@ namespace Jumbled_API.Controllers
             {
                 return BadRequest();
             }    
-            // return Ok(new Jumbled().GetDictionaryWords(word));
-            return Ok("Hello World")
+            return Ok(new Jumbled().GetDictionaryWords(word));
         }
     }
 }
