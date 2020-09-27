@@ -31,11 +31,11 @@ namespace Jumbled_API.Services
             return dictionary;
         }
 
-        private String GenerateWordKey(String inputString)
+        private string GenerateWordKey(string inputString)
         {
             char[] chars = inputString.ToCharArray();
             Array.Sort(chars);
-            return new String(chars);
+            return new string(chars);
         }
     }
 }
