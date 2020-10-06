@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Jumbled_API.Services;
 
 namespace Jumbled_API.Controllers
@@ -8,13 +7,6 @@ namespace Jumbled_API.Controllers
     [Route("[controller]")]
     public class JumbledController : ControllerBase
     {
-        private readonly ILogger<JumbledController> _logger;
-
-        public JumbledController(ILogger<JumbledController> logger)
-        {
-            _logger = logger;
-        }
-
         [HttpGet]
         public IActionResult Get(string word)
         {

@@ -7,10 +7,12 @@ namespace Jumbled_API.Services
     public class Jumbled
     {
         Dictionary<string, List<string>> dictionary;
-        public Jumbled() 
+        
+        public Jumbled()
         {
             this.dictionary = CreateDictionary();
         }
+
         public List<string> GetDictionaryWords(string jumbledWord)
         {
             string jumbledWordKey = GenerateWordKey(jumbledWord.ToLower());
