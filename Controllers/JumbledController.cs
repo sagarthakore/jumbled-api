@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Jumbled_API.Services;
+using Jumbled_API.Services.Interfaces;
 
 namespace Jumbled_API.Controllers
 {
@@ -7,6 +7,12 @@ namespace Jumbled_API.Controllers
     [Route("[controller]")]
     public class JumbledController : ControllerBase
     {
+        private readonly IJumbledService _jumbledService;
+        public JumbledController(IJumbledService jumbledService)
+        {
+            _jumbledService = jumbledService;
+        }
+
         [HttpGet]
         public IActionResult Get(string word)
         {
@@ -14,7 +20,7 @@ namespace Jumbled_API.Controllers
             {
                 return BadRequest();
             }    
-            return Ok(new Jumbled().GetDictionaryWords(word));
+            return Ok(_jumbledService.GetDictionaryWords(word));
         }
     }
 }

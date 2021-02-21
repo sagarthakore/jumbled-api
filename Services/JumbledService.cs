@@ -1,14 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Jumbled_API.Services.Interfaces;
 
 namespace Jumbled_API.Services
 {
-    public class Jumbled
+    public class JumbledService : IJumbledService
     {
         Dictionary<string, List<string>> dictionary;
         
-        public Jumbled()
+        public JumbledService()
         {
             this.dictionary = CreateDictionary();
         }
