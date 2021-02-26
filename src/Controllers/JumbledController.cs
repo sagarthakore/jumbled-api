@@ -8,6 +8,7 @@ namespace Jumbled_API.Controllers
     public class JumbledController : ControllerBase
     {
         private readonly IJumbledService _jumbledService;
+
         public JumbledController(IJumbledService jumbledService)
         {
             _jumbledService = jumbledService;
@@ -16,10 +17,10 @@ namespace Jumbled_API.Controllers
         [HttpGet]
         public IActionResult Get(string word)
         {
-            if (string.IsNullOrEmpty(word)) 
+            if (string.IsNullOrEmpty(word))
             {
                 return BadRequest();
-            }    
+            }
             return Ok(_jumbledService.GetDictionaryWords(word));
         }
     }

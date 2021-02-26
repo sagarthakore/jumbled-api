@@ -7,8 +7,8 @@ namespace Jumbled_API.Services
 {
     public class JumbledService : IJumbledService
     {
-        Dictionary<string, List<string>> dictionary;
-        
+        private readonly Dictionary<string, List<string>> dictionary;
+
         public JumbledService()
         {
             this.dictionary = CreateDictionary();
@@ -23,8 +23,7 @@ namespace Jumbled_API.Services
         private Dictionary<string, List<string>> CreateDictionary()
         {
             Dictionary<string, List<string>> dictionary = new Dictionary<string, List<string>>();
-            string[] words = File.ReadAllLines("Resources/words_en.txt");
-            foreach (string word in words)
+            foreach (string word in File.ReadAllLines("Resources/words_en.txt"))
             {
                 string wordKey = GenerateWordKey(word);
                 List<string> wordList = dictionary.ContainsKey(wordKey) ? dictionary[wordKey] : new List<string>();
