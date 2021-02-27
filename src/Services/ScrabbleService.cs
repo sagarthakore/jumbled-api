@@ -51,7 +51,7 @@ namespace Jumbled_API.Services
                 }
             }
 
-            return scrabbleResult;
+            return scrabbleResult.OrderByDescending(sr => sr.score).ToList();
         }
 
         private Dictionary<char, int> GetLetterScores()
