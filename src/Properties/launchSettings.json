@@ -20,7 +20,7 @@
     "Jumbled_API": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "jumbled?word=danger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
