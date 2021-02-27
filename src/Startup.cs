@@ -22,6 +22,7 @@ namespace Jumbled_API
         {
             services.AddControllers();
             services.AddScoped<IJumbledService, JumbledService>();
+            services.AddScoped<IScrabbleService, ScrabbleService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
