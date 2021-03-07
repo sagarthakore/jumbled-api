@@ -9,15 +9,16 @@ namespace Jumbled_API.Services
     public class ScrabbleService : IScrabbleService
     {
         private readonly Dictionary<char, int> letterScores;
+        private string[] scrabbleWords;
 
         public ScrabbleService()
         {
             letterScores = GetLetterScores();
+            scrabbleWords = File.ReadAllLines("Resources/scrabblewords.txt");
         }
 
         public List<ScrabbleResult> GetScrabbleWordsWithScores(string rack)
         {
-            string[] scrabbleWords = File.ReadAllLines("Resources/scrabblewords.txt");
             List<ScrabbleResult> scrabbleResult = new List<ScrabbleResult>();
 
             foreach (string word in scrabbleWords)
