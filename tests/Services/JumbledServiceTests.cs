@@ -19,12 +19,16 @@ namespace Jumbled_API_TESTS
         public void GetDictionaryWords_WordsExist_GetWords(string value)
         {
             List<string> result = _jumbledService.GetDictionaryWords(value);
-            Assert.Contains("danger", result);
-            Assert.Contains("gander", result);
-            Assert.Contains("garden", result);
-            Assert.Contains("grande", result);
-            Assert.Contains("ranged", result);
-            Assert.Equal(5, result.Count);
+            List<string> expected = new List<string>
+            {
+                "danger",
+                "gander",
+                "garden",
+                "grande",
+                "ranged"
+            };
+
+            Assert.Equal(expected, result);
         }
 
         [Theory]
