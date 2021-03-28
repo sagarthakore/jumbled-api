@@ -32,17 +32,16 @@ namespace Jumbled_API_TESTS
         }
 
         [Theory]
-        [InlineData("cess", 6)]
-        public void GetDictionaryWordsFromPartWord_WordsExist_GetWords(string value, int length)
+        [InlineData("f______rk")]
+        public void GetDictionaryWordsFromPartWord_WordsExist_GetWords(string value)
         {
-            List<string> result = _jumbledService.GetDictionaryWords(value, length);
+            List<string> result = _jumbledService.GetDictionaryWordsFromLetters(value);
             List<string> expected = new List<string>
             {
-                "access",
-                "cessed",
-                "cesses",
-                "excess",
-                "recess"
+                "fancywork",
+                "fieldwork",
+                "framework",
+                "frostwork"
             };
 
             Assert.Equal(expected, result);
@@ -57,10 +56,10 @@ namespace Jumbled_API_TESTS
         }
 
         [Theory]
-        [InlineData("cess", 90)]
-        public void GetDictionaryWordsFromPart_WordsDontExist_GetEmptyArray(string value, int length)
+        [InlineData("kl__fd__h_la")]
+        public void GetDictionaryWordsFromPart_WordsDontExist_GetEmptyArray(string value)
         {
-            List<string> result = _jumbledService.GetDictionaryWords(value, length);
+            List<string> result = _jumbledService.GetDictionaryWords(value);
             Assert.Empty(result);
         }
     }

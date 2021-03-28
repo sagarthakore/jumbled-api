@@ -15,13 +15,13 @@ namespace Jumbled_API.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get(string word, int length)
+        public IActionResult Get(string word)
         {
-            if (string.IsNullOrEmpty(word) || length <= 0)
+            if (string.IsNullOrEmpty(word))
             {
                 return BadRequest();
             }
-            return Ok(_jumbledService.GetDictionaryWords(word, length));
+            return Ok(_jumbledService.GetDictionaryWordsFromLetters(word));
         }
     }
 }

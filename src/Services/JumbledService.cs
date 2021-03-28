@@ -23,9 +23,27 @@ namespace Jumbled_API.Services
             return this.dictionary.ContainsKey(jumbledWordKey) ? this.dictionary[jumbledWordKey] : new List<string>();
         }
 
-        public List<string> GetDictionaryWords(string wordPart, int wordLength)
+        public List<string> GetDictionaryWordsFromLetters(string letters)
         {
-            return this.words.Where(word => word.Length == wordLength && word.Contains(wordPart)).ToList() ?? new List<string>();
+            if (letters.Length == 0) return new List<string>();
+            List<string> result = new List<string>();
+            
+            foreach (string word in this.words.Where(word => word.Length == letters.Length)?.ToList())
+            {
+                bool candidate = true;
+                for (int i = 0; i < letters.Length; i++)
+                {
+                    if (letters[i] != '_' && letters[i] != word[i])
+                    {
+                        candidate = false;
+                        break;
+                    }
+                }
+                
+                if (candidate) result.Add(word);
+            }
+
+            return result;
         }
 
         private List<string> ReadWordsFromFile()
