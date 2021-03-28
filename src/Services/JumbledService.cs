@@ -13,7 +13,7 @@ namespace Jumbled_API.Services
 
         public JumbledService()
         {
-            this.words = ReadWordsFromFile();
+            this.words = File.ReadAllLines("Resources/words_en.txt").ToList();
             this.dictionary = CreateDictionary();
         }
 
@@ -44,11 +44,6 @@ namespace Jumbled_API.Services
             }
 
             return result;
-        }
-
-        private List<string> ReadWordsFromFile()
-        {
-            return File.ReadAllLines("Resources/words_en.txt").ToList();
         }
 
         private Dictionary<string, List<string>> CreateDictionary()

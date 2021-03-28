@@ -9,19 +9,19 @@ namespace Jumbled_API.Services
     public class ScrabbleService : IScrabbleService
     {
         private readonly Dictionary<char, int> letterScores;
-        private string[] scrabbleWords;
+        private List<string> scrabbleWords;
 
         public ScrabbleService()
         {
+            scrabbleWords = File.ReadAllLines("Resources/scrabblewords.txt").ToList();
             letterScores = GetLetterScores();
-            scrabbleWords = File.ReadAllLines("Resources/scrabblewords.txt");
         }
 
         public List<ScrabbleResult> GetScrabbleWordsWithScores(string rack)
         {
             List<ScrabbleResult> scrabbleResult = new List<ScrabbleResult>();
 
-            foreach (string word in scrabbleWords)
+            foreach (string word in scrabbleWords.Where(word => word.Length <= rack.Length))
             {
                 bool candidate = true;
                 List<char> rackLetters = rack.ToUpper().ToList();
