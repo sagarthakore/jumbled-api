@@ -29,7 +29,7 @@ namespace Jumbled_API_TESTS
             };
 
             List<ScrabbleResult> result = _scrabbleService.GetScrabbleWordsWithScores(value);
-            
+
             Assert.Contains(result, result => result.word == "AA" && result.score == 2);
             Assert.Contains(result, result => result.word == "AH" && result.score == 5);
             Assert.Contains(result, result => result.word == "HA" && result.score == 5);

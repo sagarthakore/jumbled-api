@@ -9,7 +9,7 @@ namespace Jumbled_API.Services
     public class ScrabbleService : IScrabbleService
     {
         private readonly Dictionary<char, int> letterScores;
-        private List<string> scrabbleWords;
+        private readonly List<string> scrabbleWords;
 
         public ScrabbleService()
         {
@@ -45,7 +45,7 @@ namespace Jumbled_API.Services
 
                     foreach (char letter in word)
                     {
-                        total = total + letterScores[letter];
+                        total += letterScores[letter];
                     }
 
                     scrabbleResult.Add(new ScrabbleResult() { word = word, score = total });

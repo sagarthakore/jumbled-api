@@ -13,8 +13,8 @@ namespace Jumbled_API.Services
 
         public JumbledService()
         {
-            this.words = File.ReadAllLines("Resources/words_en.txt").ToList();
-            this.dictionary = CreateDictionary();
+            words = File.ReadAllLines("Resources/words_en.txt").ToList();
+            dictionary = CreateDictionary();
         }
 
         public List<string> GetDictionaryWords(string jumbledWord)
@@ -27,7 +27,7 @@ namespace Jumbled_API.Services
         {
             if (letters.Length == 0) return new List<string>();
             List<string> result = new List<string>();
-            
+
             foreach (string word in this.words.Where(word => word.Length == letters.Length)?.ToList())
             {
                 bool candidate = true;
@@ -39,7 +39,7 @@ namespace Jumbled_API.Services
                         break;
                     }
                 }
-                
+
                 if (candidate) result.Add(word);
             }
 
