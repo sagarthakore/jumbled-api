@@ -48,11 +48,11 @@ namespace Jumbled_API.Services
                         total += letterScores[letter];
                     }
 
-                    scrabbleResult.Add(new ScrabbleResult() { word = word, score = total });
+                    scrabbleResult.Add(new ScrabbleResult { Word = word, Score = total });
                 }
             }
 
-            return scrabbleResult.OrderByDescending(sr => sr.score).ToList();
+            return scrabbleResult.OrderByDescending(sr => sr.Score).ToList();
         }
 
         private Dictionary<char, int> GetLetterScores()

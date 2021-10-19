@@ -21,20 +21,20 @@ namespace Jumbled_API_TESTS
         {
             List<ScrabbleResult> expectedResult = new List<ScrabbleResult>()
             {
-                new ScrabbleResult { word = "AA", score = 2 },
-                new ScrabbleResult { word = "AA", score = 2 },
-                new ScrabbleResult { word = "AA", score = 2 },
-                new ScrabbleResult { word = "AA", score = 2 },
-                new ScrabbleResult { word = "AA", score = 2 }
+                new ScrabbleResult { Word = "AA", Score = 2 },
+                new ScrabbleResult { Word = "AA", Score = 2 },
+                new ScrabbleResult { Word = "AA", Score = 2 },
+                new ScrabbleResult { Word = "AA", Score = 2 },
+                new ScrabbleResult { Word = "AA", Score = 2 }
             };
 
             List<ScrabbleResult> result = _scrabbleService.GetScrabbleWordsWithScores(value);
 
-            Assert.Contains(result, result => result.word == "AA" && result.score == 2);
-            Assert.Contains(result, result => result.word == "AH" && result.score == 5);
-            Assert.Contains(result, result => result.word == "HA" && result.score == 5);
-            Assert.Contains(result, result => result.word == "AAH" && result.score == 6);
-            Assert.Contains(result, result => result.word == "AHA" && result.score == 6);
+            Assert.Contains(result, result => result.Word == "AA" && result.Score == 2);
+            Assert.Contains(result, result => result.Word == "AH" && result.Score == 5);
+            Assert.Contains(result, result => result.Word == "HA" && result.Score == 5);
+            Assert.Contains(result, result => result.Word == "AAH" && result.Score == 6);
+            Assert.Contains(result, result => result.Word == "AHA" && result.Score == 6);
             Assert.Equal(5, result.Count);
         }
 
