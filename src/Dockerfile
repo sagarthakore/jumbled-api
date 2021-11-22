@@ -7,10 +7,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
-COPY ["src/JUMBLED-API.csproj", "src/"]
+COPY ["JUMBLED-API.csproj", "src/"]
 RUN dotnet restore "src/JUMBLED-API.csproj"
 COPY . .
-WORKDIR "/src/src"
+WORKDIR "/src"
 RUN dotnet build "JUMBLED-API.csproj" -c Release -o /app/build
 
 FROM build AS publish
