@@ -23,9 +23,11 @@ namespace Jumbled_API.Services
             return dictionary.ContainsKey(jumbledWordKey) ? dictionary[jumbledWordKey] : new List<string>();
         }
 
-        public List<string> GetDictionaryWordsFromLetters(string letters)
+        public List<string> GetDictionaryWordsFromLetters(string letters, string exclude)
         {
             if (letters.Length == 0) return new List<string>();
+            if (string.IsNullOrEmpty(exclude)) exclude = string.Empty;
+
             List<string> result = new List<string>();
 
             foreach (string word in words.Where(word => word.Length == letters.Length)?.ToList())
@@ -33,7 +35,7 @@ namespace Jumbled_API.Services
                 bool candidate = true;
                 for (int i = 0; i < letters.Length; i++)
                 {
-                    if (letters[i] != '_' && letters[i] != word[i])
+                    if ((letters[i] != '_' && letters[i] != word[i]) || exclude.Contains(word[i]))
                     {
                         candidate = false;
                         break;

@@ -32,16 +32,30 @@ namespace Jumbled_API_TESTS
         }
 
         [Theory]
-        [InlineData("f______rk")]
-        public void GetDictionaryWordsFromPartWord_WordsExist_GetWords(string value)
+        [InlineData("f______rk", "")]
+        public void GetDictionaryWordsFromPartWord_WordsExist_GetWords(string value, string exclude)
         {
-            List<string> result = _jumbledService.GetDictionaryWordsFromLetters(value);
+            List<string> result = _jumbledService.GetDictionaryWordsFromLetters(value, exclude);
             List<string> expected = new List<string>
             {
                 "fancywork",
                 "fieldwork",
                 "framework",
                 "frostwork"
+            };
+
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData("_rick", "tb")]
+        public void GetDictionaryWordsFromPartWordExcludeLetters_WordsExist_GetWords(string value, string exclude)
+        {
+            List<string> result = _jumbledService.GetDictionaryWordsFromLetters(value, exclude);
+            List<string> expected = new List<string>
+            {
+                "crick",
+                "prick"
             };
 
             Assert.Equal(expected, result);
@@ -56,10 +70,10 @@ namespace Jumbled_API_TESTS
         }
 
         [Theory]
-        [InlineData("kl__fd__h_la")]
-        public void GetDictionaryWordsFromPart_WordsDontExist_GetEmptyArray(string value)
+        [InlineData("kl__fd__h_la", "")]
+        public void GetDictionaryWordsFromPart_WordsDontExist_GetEmptyArray(string value, string exclude)
         {
-            List<string> result = _jumbledService.GetDictionaryWords(value);
+            List<string> result = _jumbledService.GetDictionaryWordsFromLetters(value, exclude);
             Assert.Empty(result);
         }
     }
