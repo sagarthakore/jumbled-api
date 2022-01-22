@@ -23,19 +23,55 @@ namespace Jumbled_API.Services
             return dictionary.ContainsKey(jumbledWordKey) ? dictionary[jumbledWordKey] : new List<string>();
         }
 
-        public List<string> GetDictionaryWordsFromLetters(string letters, string exclude)
+        public List<string> GetDictionaryWordsFromLetters(string letters, string exclude, string include)
         {
             if (letters.Length == 0) return new List<string>();
-            if (string.IsNullOrEmpty(exclude)) exclude = string.Empty;
 
             List<string> result = new List<string>();
+            List<string> filteredWords = words.Where(word => word.Length == letters.Length)?.ToList();
 
-            foreach (string word in words.Where(word => word.Length == letters.Length)?.ToList())
+            if (!string.IsNullOrEmpty(exclude))
+            {
+                foreach (string word in words.Where(word => word.Length == letters.Length)?.ToList())
+                {
+                    bool candidate = false;
+                    for (int i = 0; i < exclude.Length; i++)
+                    {
+                        if (word.Contains(exclude[i]))
+                        {
+                            candidate = true;
+                            break;
+                        }
+                    }
+
+                    if (candidate) filteredWords.RemoveAll(w => w == word);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(include))
+            {
+                foreach (string word in words.Where(word => word.Length == letters.Length)?.ToList())
+                {
+                    bool candidate = false;
+                    for (int i = 0; i < include.Length; i++)
+                    {
+                        if (!word.Contains(include[i]))
+                        {
+                            candidate = true;
+                            break;
+                        }
+                    }
+
+                    if (candidate) filteredWords.RemoveAll(w => w == word);
+                }
+            }
+
+            foreach (string word in filteredWords)
             {
                 bool candidate = true;
                 for (int i = 0; i < letters.Length; i++)
                 {
-                    if ((letters[i] != '_' && letters[i] != word[i]) || exclude.Contains(word[i]))
+                    if (letters[i] != '_' && letters[i] != word[i])
                     {
                         candidate = false;
                         break;
