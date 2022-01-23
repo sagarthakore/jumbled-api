@@ -9,7 +9,7 @@ namespace Jumbled_API.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok("Ready");
+            return Ok("ready");
         }
     }
 }
