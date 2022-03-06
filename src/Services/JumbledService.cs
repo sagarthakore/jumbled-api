@@ -23,16 +23,16 @@ namespace Jumbled_API.Services
             return dictionary.ContainsKey(jumbledWordKey) ? dictionary[jumbledWordKey] : new List<string>();
         }
 
-        public List<string> GetDictionaryWordsFromLetters(string letters, string exclude, string include)
+        public List<string> GetWordleGuess(string guess, string exclude, string include)
         {
-            if (letters.Length == 0) return new List<string>();
+            if (guess.Length == 0) return new List<string>();
 
             List<string> result = new List<string>();
-            List<string> filteredWords = words.Where(word => word.Length == letters.Length)?.ToList();
+            List<string> filteredWords = words.Where(word => word.Length == guess.Length)?.ToList();
 
             if (!string.IsNullOrEmpty(exclude))
             {
-                foreach (string word in words.Where(word => word.Length == letters.Length)?.ToList())
+                foreach (string word in words.Where(word => word.Length == guess.Length)?.ToList())
                 {
                     bool candidate = false;
                     for (int i = 0; i < exclude.Length; i++)
@@ -48,14 +48,14 @@ namespace Jumbled_API.Services
                 }
             }
 
-            if (!string.IsNullOrEmpty(include))
+            if (!string.IsNullOrEmpty(include) && include.Length == guess.Length)
             {
-                foreach (string word in words.Where(word => word.Length == letters.Length)?.ToList())
+                foreach (string word in words.Where(word => word.Length == guess.Length)?.ToList())
                 {
                     bool candidate = false;
                     for (int i = 0; i < include.Length; i++)
                     {
-                        if (!word.Contains(include[i]))
+                        if (include[i] != '_' && (!word.Contains(include[i]) || include[i] == word[i]))
                         {
                             candidate = true;
                             break;
@@ -69,9 +69,9 @@ namespace Jumbled_API.Services
             foreach (string word in filteredWords)
             {
                 bool candidate = true;
-                for (int i = 0; i < letters.Length; i++)
+                for (int i = 0; i < guess.Length; i++)
                 {
-                    if (letters[i] != '_' && letters[i] != word[i])
+                    if (guess[i] != '_' && guess[i] != word[i])
                     {
                         candidate = false;
                         break;

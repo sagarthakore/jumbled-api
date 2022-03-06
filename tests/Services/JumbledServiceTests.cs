@@ -33,9 +33,9 @@ namespace Jumbled_API_TESTS
 
         [Theory]
         [InlineData("f______rk", "", "")]
-        public void GetDictionaryWordsFromPartWord_WordsExist_GetWords(string value, string exclude, string include)
+        public void GetWordleGuessWord_WordsExist_GetWords(string value, string exclude, string include)
         {
-            List<string> result = _jumbledService.GetDictionaryWordsFromLetters(value, exclude, include);
+            List<string> result = _jumbledService.GetWordleGuess(value, exclude, include);
             List<string> expected = new List<string>
             {
                 "fancywork",
@@ -49,9 +49,9 @@ namespace Jumbled_API_TESTS
 
         [Theory]
         [InlineData("_rick", "tb", "")]
-        public void GetDictionaryWordsFromPartWordExcludeLetters_WordsExist_GetWords(string value, string exclude, string include)
+        public void GetWordleGuessWordExcludeLetters_WordsExist_GetWords(string value, string exclude, string include)
         {
-            List<string> result = _jumbledService.GetDictionaryWordsFromLetters(value, exclude, include);
+            List<string> result = _jumbledService.GetWordleGuess(value, exclude, include);
             List<string> expected = new List<string>
             {
                 "crick",
@@ -62,10 +62,10 @@ namespace Jumbled_API_TESTS
         }
 
         [Theory]
-        [InlineData("_rick", "", "b")]
-        public void GetDictionaryWordsFromPartWordIncludeLetters_WordsExist_GetWords(string value, string exclude, string include)
+        [InlineData("_ric_", "", "____b")]
+        public void GetWordleGuessWordIncludeLetters_WordsExist_GetWords(string value, string exclude, string include)
         {
-            List<string> result = _jumbledService.GetDictionaryWordsFromLetters(value, exclude, include);
+            List<string> result = _jumbledService.GetWordleGuess(value, exclude, include);
             List<string> expected = new List<string>
             {
                 "brick"
@@ -75,14 +75,17 @@ namespace Jumbled_API_TESTS
         }
 
         [Theory]
-        [InlineData("_rick", "asebt", "r")]
-        public void GetDictionaryWordsFromPartWordIncludeExcludeLetters_WordsExist_GetWords(string value, string exclude, string include)
+        [InlineData("_o___", "ad", "b__r_")]
+        public void GetWordleGuessWordIncludeExcludeLetters_WordsExist_GetWords(string value, string exclude, string include)
         {
-            List<string> result = _jumbledService.GetDictionaryWordsFromLetters(value, exclude, include);
+            List<string> result = _jumbledService.GetWordleGuess(value, exclude, include);
             List<string> expected = new List<string>
             {
-                "crick",
-                "prick"
+                "robes",
+                "robin",
+                "roble",
+                "robot",
+                "sober"
             };
 
             Assert.Equal(expected, result);
@@ -98,9 +101,9 @@ namespace Jumbled_API_TESTS
 
         [Theory]
         [InlineData("kl__fd__h_la", "", "")]
-        public void GetDictionaryWordsFromPart_WordsDontExist_GetEmptyArray(string value, string exclude, string include)
+        public void GetWordleGuess_WordsDontExist_GetEmptyArray(string value, string exclude, string include)
         {
-            List<string> result = _jumbledService.GetDictionaryWordsFromLetters(value, exclude, include);
+            List<string> result = _jumbledService.GetWordleGuess(value, exclude, include);
             Assert.Empty(result);
         }
     }

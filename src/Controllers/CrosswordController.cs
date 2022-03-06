@@ -21,7 +21,7 @@ namespace Jumbled_API.Controllers
             {
                 return BadRequest();
             }
-            return Ok(_jumbledService.GetDictionaryWordsFromLetters(word, exclude, include));
+            return Ok(_jumbledService.GetWordleGuess(word, exclude, include));
         }
     }
 }

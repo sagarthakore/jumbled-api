@@ -5,6 +5,6 @@ namespace Jumbled_API.Services.Interfaces
     public interface IJumbledService
     {
         List<string> GetDictionaryWords(string jumbledWord);
-        List<string> GetDictionaryWordsFromLetters(string letters, string exclude, string include);
+        List<string> GetWordleGuess(string guess, string exclude, string include);
     }
 }
