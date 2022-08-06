@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>Jumbled_API</RootNamespace>
     <UserSecretsId>29fa626c-f80c-4678-95e8-360c29eafb19</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
