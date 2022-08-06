@@ -19,7 +19,7 @@ namespace Jumbled_API_TESTS
         public void GetDictionaryWords_WordsExist_GetWords(string value)
         {
             List<string> result = _jumbledService.GetDictionaryWords(value);
-            List<string> expected = new List<string>
+            List<string> expected = new()
             {
                 "danger",
                 "gander",
@@ -36,7 +36,7 @@ namespace Jumbled_API_TESTS
         public void GetWordleGuessWord_WordsExist_GetWords(string value, string exclude, string include)
         {
             List<string> result = _jumbledService.GetWordleGuess(value, exclude, include);
-            List<string> expected = new List<string>
+            List<string> expected = new()
             {
                 "fancywork",
                 "fieldwork",
@@ -52,7 +52,7 @@ namespace Jumbled_API_TESTS
         public void GetWordleGuessWordExcludeLetters_WordsExist_GetWords(string value, string exclude, string include)
         {
             List<string> result = _jumbledService.GetWordleGuess(value, exclude, include);
-            List<string> expected = new List<string>
+            List<string> expected = new()
             {
                 "crick",
                 "prick"
@@ -66,7 +66,7 @@ namespace Jumbled_API_TESTS
         public void GetWordleGuessWordIncludeLetters_WordsExist_GetWords(string value, string exclude, string include)
         {
             List<string> result = _jumbledService.GetWordleGuess(value, exclude, include);
-            List<string> expected = new List<string>
+            List<string> expected = new()
             {
                 "brick"
             };
@@ -79,7 +79,7 @@ namespace Jumbled_API_TESTS
         public void GetWordleGuessWordIncludeExcludeLetters_WordsExist_GetWords(string value, string exclude, string include)
         {
             List<string> result = _jumbledService.GetWordleGuess(value, exclude, include);
-            List<string> expected = new List<string>
+            List<string> expected = new()
             {
                 "robes",
                 "robin",

@@ -27,7 +27,7 @@ namespace Jumbled_API.Services
         {
             if (guess.Length == 0) return new List<string>();
 
-            List<string> result = new List<string>();
+            List<string> result = new();
             List<string> filteredWords = words.Where(word => word.Length == guess.Length)?.ToList();
 
             if (!string.IsNullOrEmpty(exclude))
@@ -86,7 +86,7 @@ namespace Jumbled_API.Services
 
         private Dictionary<string, List<string>> CreateDictionary()
         {
-            Dictionary<string, List<string>> dictionary = new Dictionary<string, List<string>>();
+            Dictionary<string, List<string>> dictionary = new();
             foreach (string word in words)
             {
                 string wordKey = GenerateWordKey(word);

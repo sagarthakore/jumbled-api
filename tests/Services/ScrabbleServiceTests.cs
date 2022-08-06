@@ -19,7 +19,7 @@ namespace Jumbled_API_TESTS
         [InlineData("aah")]
         public void GetScrabbleWords_WordsExist_GetWordsWithScore(string value)
         {
-            List<ScrabbleResult> expectedResult = new List<ScrabbleResult>()
+            List<ScrabbleResult> expectedResult = new()
             {
                 new ScrabbleResult { Word = "AA", Score = 2 },
                 new ScrabbleResult { Word = "AA", Score = 2 },

@@ -19,7 +19,7 @@ namespace Jumbled_API.Services
 
         public List<ScrabbleResult> GetScrabbleWordsWithScores(string rack)
         {
-            List<ScrabbleResult> scrabbleResult = new List<ScrabbleResult>();
+            List<ScrabbleResult> scrabbleResult = new();
 
             foreach (string word in scrabbleWords.Where(word => word.Length <= rack.Length))
             {
@@ -55,7 +55,7 @@ namespace Jumbled_API.Services
             return scrabbleResult.OrderByDescending(sr => sr.Score).ToList();
         }
 
-        private Dictionary<char, int> GetLetterScores()
+        private static Dictionary<char, int> GetLetterScores()
         {
             return new Dictionary<char, int>()
             {
