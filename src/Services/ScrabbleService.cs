@@ -4,67 +4,66 @@ using System.Linq;
 using Jumbled_API.Models;
 using Jumbled_API.Services.Interfaces;
 
-namespace Jumbled_API.Services
+namespace Jumbled_API.Services;
+
+public class ScrabbleService : IScrabbleService
 {
-    public class ScrabbleService : IScrabbleService
+    private readonly Dictionary<char, int> letterScores;
+    private readonly List<string> scrabbleWords;
+
+    public ScrabbleService()
     {
-        private readonly Dictionary<char, int> letterScores;
-        private readonly List<string> scrabbleWords;
+        scrabbleWords = File.ReadAllLines("Resources/scrabblewords.txt").ToList();
+        letterScores = GetLetterScores();
+    }
 
-        public ScrabbleService()
+    public List<ScrabbleResult> GetScrabbleWordsWithScores(string rack)
+    {
+        List<ScrabbleResult> scrabbleResult = new();
+
+        foreach (string word in scrabbleWords.Where(word => word.Length <= rack.Length))
         {
-            scrabbleWords = File.ReadAllLines("Resources/scrabblewords.txt").ToList();
-            letterScores = GetLetterScores();
-        }
+            bool candidate = true;
+            List<char> rackLetters = rack.ToUpper().ToList();
 
-        public List<ScrabbleResult> GetScrabbleWordsWithScores(string rack)
-        {
-            List<ScrabbleResult> scrabbleResult = new();
-
-            foreach (string word in scrabbleWords.Where(word => word.Length <= rack.Length))
+            foreach (char letter in word)
             {
-                bool candidate = true;
-                List<char> rackLetters = rack.ToUpper().ToList();
-
-                foreach (char letter in word)
+                if (!rackLetters.Contains(letter))
                 {
-                    if (!rackLetters.Contains(letter))
-                    {
-                        candidate = false;
-                        break;
-                    }
-                    else
-                    {
-                        rackLetters.Remove(letter);
-                    }
+                    candidate = false;
+                    break;
                 }
-
-                if (candidate)
+                else
                 {
-                    int total = 0;
-
-                    foreach (char letter in word)
-                    {
-                        total += letterScores[letter];
-                    }
-
-                    scrabbleResult.Add(new ScrabbleResult { Word = word, Score = total });
+                    rackLetters.Remove(letter);
                 }
             }
 
-            return scrabbleResult.OrderByDescending(sr => sr.Score).ToList();
+            if (candidate)
+            {
+                int total = 0;
+
+                foreach (char letter in word)
+                {
+                    total += letterScores[letter];
+                }
+
+                scrabbleResult.Add(new ScrabbleResult { Word = word, Score = total });
+            }
         }
 
-        private static Dictionary<char, int> GetLetterScores()
+        return scrabbleResult.OrderByDescending(sr => sr.Score).ToList();
+    }
+
+    private static Dictionary<char, int> GetLetterScores()
+    {
+        return new Dictionary<char, int>()
         {
-            return new Dictionary<char, int>()
-            {
-                {'A', 1}, {'B', 3}, {'C', 3}, {'D', 2}, {'E', 1}, {'F', 4},
-                {'G', 2}, {'H', 4}, {'I', 1}, {'J', 8}, {'K', 5}, {'L', 1},
-                {'M', 3}, {'N', 1}, {'O', 1}, {'P', 3}, {'Q', 10}, {'R', 1},
-                {'S', 1}, {'T', 1}, {'U', 1}, {'V', 4}, {'W', 4}, {'X', 8},
-                {'Y', 4}, {'Z', 10}
-            };
-        }
+            {'A', 1}, {'B', 3}, {'C', 3}, {'D', 2}, {'E', 1}, {'F', 4},
+            {'G', 2}, {'H', 4}, {'I', 1}, {'J', 8}, {'K', 5}, {'L', 1},
+            {'M', 3}, {'N', 1}, {'O', 1}, {'P', 3}, {'Q', 10}, {'R', 1},
+            {'S', 1}, {'T', 1}, {'U', 1}, {'V', 4}, {'W', 4}, {'X', 8},
+            {'Y', 4}, {'Z', 10}
+        };
     }
 }

@@ -1,27 +1,26 @@
 using Microsoft.AspNetCore.Mvc;
 using Jumbled_API.Services.Interfaces;
 
-namespace Jumbled_API.Controllers
+namespace Jumbled_API.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+public class CrosswordController : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class CrosswordController : ControllerBase
+    private readonly IJumbledService _jumbledService;
+
+    public CrosswordController(IJumbledService jumbledService)
     {
-        private readonly IJumbledService _jumbledService;
+        _jumbledService = jumbledService;
+    }
 
-        public CrosswordController(IJumbledService jumbledService)
+    [HttpGet]
+    public IActionResult Get([FromQuery]string word, [FromQuery]string exclude, [FromQuery]string include)
+    {
+        if (string.IsNullOrEmpty(word))
         {
-            _jumbledService = jumbledService;
+            return BadRequest();
         }
-
-        [HttpGet]
-        public IActionResult Get([FromQuery]string word, [FromQuery]string exclude, [FromQuery]string include)
-        {
-            if (string.IsNullOrEmpty(word))
-            {
-                return BadRequest();
-            }
-            return Ok(_jumbledService.GetWordleGuess(word, exclude, include));
-        }
+        return Ok(_jumbledService.GetWordleGuess(word, exclude, include));
     }
 }

@@ -4,46 +4,45 @@ using Jumbled_API.Services;
 using Jumbled_API.Services.Interfaces;
 using Jumbled_API.Models;
 
-namespace Jumbled_API_TESTS
+namespace Jumbled_API_TESTS;
+
+public class ScrabbleServiceTests
 {
-    public class ScrabbleServiceTests
+    private readonly IScrabbleService _scrabbleService;
+
+    public ScrabbleServiceTests()
     {
-        private readonly IScrabbleService _scrabbleService;
+        _scrabbleService = new ScrabbleService();
+    }
 
-        public ScrabbleServiceTests()
+    [Theory]
+    [InlineData("aah")]
+    public void GetScrabbleWords_WordsExist_GetWordsWithScore(string value)
+    {
+        List<ScrabbleResult> expectedResult = new()
         {
-            _scrabbleService = new ScrabbleService();
-        }
+            new ScrabbleResult { Word = "AA", Score = 2 },
+            new ScrabbleResult { Word = "AA", Score = 2 },
+            new ScrabbleResult { Word = "AA", Score = 2 },
+            new ScrabbleResult { Word = "AA", Score = 2 },
+            new ScrabbleResult { Word = "AA", Score = 2 }
+        };
 
-        [Theory]
-        [InlineData("aah")]
-        public void GetScrabbleWords_WordsExist_GetWordsWithScore(string value)
-        {
-            List<ScrabbleResult> expectedResult = new()
-            {
-                new ScrabbleResult { Word = "AA", Score = 2 },
-                new ScrabbleResult { Word = "AA", Score = 2 },
-                new ScrabbleResult { Word = "AA", Score = 2 },
-                new ScrabbleResult { Word = "AA", Score = 2 },
-                new ScrabbleResult { Word = "AA", Score = 2 }
-            };
+        List<ScrabbleResult> result = _scrabbleService.GetScrabbleWordsWithScores(value);
 
-            List<ScrabbleResult> result = _scrabbleService.GetScrabbleWordsWithScores(value);
+        Assert.Contains(result, result => result.Word == "AA" && result.Score == 2);
+        Assert.Contains(result, result => result.Word == "AH" && result.Score == 5);
+        Assert.Contains(result, result => result.Word == "HA" && result.Score == 5);
+        Assert.Contains(result, result => result.Word == "AAH" && result.Score == 6);
+        Assert.Contains(result, result => result.Word == "AHA" && result.Score == 6);
+        Assert.Equal(5, result.Count);
+    }
 
-            Assert.Contains(result, result => result.Word == "AA" && result.Score == 2);
-            Assert.Contains(result, result => result.Word == "AH" && result.Score == 5);
-            Assert.Contains(result, result => result.Word == "HA" && result.Score == 5);
-            Assert.Contains(result, result => result.Word == "AAH" && result.Score == 6);
-            Assert.Contains(result, result => result.Word == "AHA" && result.Score == 6);
-            Assert.Equal(5, result.Count);
-        }
-
-        [Theory]
-        [InlineData("plplplplplpl")]
-        public void GetScrabbleWords_WordsDontExist_GetEmptyArray(string value)
-        {
-            List<ScrabbleResult> result = _scrabbleService.GetScrabbleWordsWithScores(value);
-            Assert.Empty(result);
-        }
+    [Theory]
+    [InlineData("plplplplplpl")]
+    public void GetScrabbleWords_WordsDontExist_GetEmptyArray(string value)
+    {
+        List<ScrabbleResult> result = _scrabbleService.GetScrabbleWordsWithScores(value);
+        Assert.Empty(result);
     }
 }

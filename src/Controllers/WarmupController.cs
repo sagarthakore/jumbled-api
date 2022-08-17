@@ -1,15 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Jumbled_API.Controllers
+namespace Jumbled_API.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+public class WarmupController : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class WarmupController : ControllerBase
+    [HttpGet]
+    public IActionResult Get()
     {
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok("ready");
-        }
+        return Ok("ready");
     }
 }

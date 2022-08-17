@@ -1,9 +1,8 @@
-namespace Jumbled_API.Models
-{
-    public class ScrabbleResult
-    {
-        public string Word { get; set; }
+namespace Jumbled_API.Models;
 
-        public int Score { get; set; }
-    }
+public class ScrabbleResult
+{
+    public string Word { get; set; }
+
+    public int Score { get; set; }
 }
