@@ -97,7 +97,7 @@ public class JumbledService : IJumbledService
         return dictionary;
     }
 
-    private string GenerateWordKey(string inputString)
+    private static string GenerateWordKey(string inputString)
     {
         char[] chars = inputString.ToCharArray();
         Array.Sort(chars);
