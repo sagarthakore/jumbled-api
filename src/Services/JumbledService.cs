@@ -8,7 +8,7 @@ namespace Jumbled_API.Services;
 
 public class JumbledService : IJumbledService
 {
-    private readonly Dictionary<string, List<string>> dictionary;
+    private readonly Dictionary<string, HashSet<string>> dictionary;
     private readonly List<string> words;
 
     public JumbledService()
@@ -17,17 +17,17 @@ public class JumbledService : IJumbledService
         dictionary = CreateDictionary();
     }
 
-    public List<string> GetDictionaryWords(string jumbledWord)
+    public HashSet<string> GetDictionaryWords(string jumbledWord)
     {
         string jumbledWordKey = GenerateWordKey(jumbledWord.ToLower());
-        return dictionary.ContainsKey(jumbledWordKey) ? dictionary[jumbledWordKey] : new List<string>();
+        return dictionary.ContainsKey(jumbledWordKey) ? dictionary[jumbledWordKey] : new HashSet<string>();
     }
 
     public List<string> GetWordleGuess(string guess, string exclude, string include)
     {
         if (guess.Length == 0) return new List<string>();
 
-        List<string> result = new();
+        var result = new List<string>();
         List<string> filteredWords = words.Where(word => word.Length == guess.Length)?.ToList();
 
         if (!string.IsNullOrEmpty(exclude))
@@ -84,13 +84,13 @@ public class JumbledService : IJumbledService
         return result;
     }
 
-    private Dictionary<string, List<string>> CreateDictionary()
+    private Dictionary<string, HashSet<string>> CreateDictionary()
     {
-        Dictionary<string, List<string>> dictionary = new();
+        Dictionary<string, HashSet<string>> dictionary = new();
         foreach (string word in words)
         {
             string wordKey = GenerateWordKey(word);
-            List<string> wordList = dictionary.ContainsKey(wordKey) ? dictionary[wordKey] : new List<string>();
+            HashSet<string> wordList = dictionary.ContainsKey(wordKey) ? dictionary[wordKey] : new HashSet<string>();
             wordList.Add(word);
             dictionary[wordKey] = wordList;
         }

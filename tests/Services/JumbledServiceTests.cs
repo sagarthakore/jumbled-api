@@ -18,8 +18,8 @@ public class JumbledServiceTests
     [InlineData("danger")]
     public void GetDictionaryWords_WordsExist_GetWords(string value)
     {
-        List<string> result = _jumbledService.GetDictionaryWords(value);
-        List<string> expected = new()
+        HashSet<string> result = _jumbledService.GetDictionaryWords(value);
+        HashSet<string> expected = new()
         {
             "danger",
             "gander",
@@ -95,7 +95,7 @@ public class JumbledServiceTests
     [InlineData("klsjfdkfhfla")]
     public void GetDictionaryWords_WordsDontExist_GetEmptyArray(string value)
     {
-        List<string> result = _jumbledService.GetDictionaryWords(value);
+        HashSet<string> result = _jumbledService.GetDictionaryWords(value);
         Assert.Empty(result);
     }
 
