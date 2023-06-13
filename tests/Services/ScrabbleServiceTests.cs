@@ -19,15 +19,6 @@ public class ScrabbleServiceTests
     [InlineData("aah")]
     public void GetScrabbleWords_WordsExist_GetWordsWithScore(string value)
     {
-        List<ScrabbleResult> expectedResult = new()
-        {
-            new ScrabbleResult { Word = "AA", Score = 2 },
-            new ScrabbleResult { Word = "AA", Score = 2 },
-            new ScrabbleResult { Word = "AA", Score = 2 },
-            new ScrabbleResult { Word = "AA", Score = 2 },
-            new ScrabbleResult { Word = "AA", Score = 2 }
-        };
-
         List<ScrabbleResult> result = _scrabbleService.GetScrabbleWordsWithScores(value);
 
         Assert.Contains(result, result => result.Word == "AA" && result.Score == 2);
