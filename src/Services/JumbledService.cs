@@ -85,22 +85,25 @@ public class JumbledService : IJumbledService
     }
 
     private Dictionary<string, HashSet<string>> CreateDictionary()
+{
+    Dictionary<string, HashSet<string>> dictionary = new();
+    foreach (string word in words)
     {
-        Dictionary<string, HashSet<string>> dictionary = new();
-        foreach (string word in words)
+        string wordKey = GenerateWordKey(word);
+        if (!dictionary.TryGetValue(wordKey, out HashSet<string> wordList))
         {
-            string wordKey = GenerateWordKey(word);
-            HashSet<string> wordList = dictionary.ContainsKey(wordKey) ? dictionary[wordKey] : new HashSet<string>();
-            wordList.Add(word);
+            wordList = new HashSet<string>();
             dictionary[wordKey] = wordList;
         }
-        return dictionary;
+        wordList.Add(word);
     }
+    return dictionary;
+}
 
     private static string GenerateWordKey(string inputString)
     {
         char[] chars = inputString.ToCharArray();
         Array.Sort(chars);
-        return new string(chars);
+        return string.Concat(chars);
     }
 }
