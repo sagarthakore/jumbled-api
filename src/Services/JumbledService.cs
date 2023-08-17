@@ -23,7 +23,7 @@ public class JumbledService : IJumbledService
         return dictionary.ContainsKey(jumbledWordKey) ? dictionary[jumbledWordKey] : new HashSet<string>();
     }
 
-    public List<string> GetWordleGuess(string guess, string exclude, string include)
+    public List<string> GetWordGuess(string guess, string exclude, string include)
     {
         if (guess.Length == 0) return new List<string>();
 

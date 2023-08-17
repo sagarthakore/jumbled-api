@@ -33,9 +33,9 @@ public class JumbledServiceTests
 
     [Theory]
     [InlineData("f______rk", "", "")]
-    public void GetWordleGuessWord_WordsExist_GetWords(string value, string exclude, string include)
+    public void GetWordGuessWord_WordsExist_GetWords(string value, string exclude, string include)
     {
-        List<string> result = _jumbledService.GetWordleGuess(value, exclude, include);
+        List<string> result = _jumbledService.GetWordGuess(value, exclude, include);
         List<string> expected = new()
         {
             "fancywork",
@@ -49,9 +49,9 @@ public class JumbledServiceTests
 
     [Theory]
     [InlineData("_rick", "tb", "")]
-    public void GetWordleGuessWordExcludeLetters_WordsExist_GetWords(string value, string exclude, string include)
+    public void GetWordGuessWordExcludeLetters_WordsExist_GetWords(string value, string exclude, string include)
     {
-        List<string> result = _jumbledService.GetWordleGuess(value, exclude, include);
+        List<string> result = _jumbledService.GetWordGuess(value, exclude, include);
         List<string> expected = new()
         {
             "crick",
@@ -63,9 +63,9 @@ public class JumbledServiceTests
 
     [Theory]
     [InlineData("_ric_", "", "____b")]
-    public void GetWordleGuessWordIncludeLetters_WordsExist_GetWords(string value, string exclude, string include)
+    public void GetWordGuessWordIncludeLetters_WordsExist_GetWords(string value, string exclude, string include)
     {
-        List<string> result = _jumbledService.GetWordleGuess(value, exclude, include);
+        List<string> result = _jumbledService.GetWordGuess(value, exclude, include);
         List<string> expected = new()
         {
             "brick"
@@ -76,9 +76,9 @@ public class JumbledServiceTests
 
     [Theory]
     [InlineData("_o___", "ad", "b__r_")]
-    public void GetWordleGuessWordIncludeExcludeLetters_WordsExist_GetWords(string value, string exclude, string include)
+    public void GetWordGuessWordIncludeExcludeLetters_WordsExist_GetWords(string value, string exclude, string include)
     {
-        List<string> result = _jumbledService.GetWordleGuess(value, exclude, include);
+        List<string> result = _jumbledService.GetWordGuess(value, exclude, include);
         List<string> expected = new()
         {
             "robes",
@@ -101,9 +101,9 @@ public class JumbledServiceTests
 
     [Theory]
     [InlineData("kl__fd__h_la", "", "")]
-    public void GetWordleGuess_WordsDontExist_GetEmptyArray(string value, string exclude, string include)
+    public void GetWordGuess_WordsDontExist_GetEmptyArray(string value, string exclude, string include)
     {
-        List<string> result = _jumbledService.GetWordleGuess(value, exclude, include);
+        List<string> result = _jumbledService.GetWordGuess(value, exclude, include);
         Assert.Empty(result);
     }
 }
