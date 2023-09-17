@@ -1,6 +1,3 @@
-using Jumbled_API.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-
 namespace Jumbled_API.Controllers;
 
 [ApiController]

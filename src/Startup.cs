@@ -1,11 +1,3 @@
-using Jumbled_API.Services;
-using Jumbled_API.Services.Interfaces;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-
 namespace Jumbled_API;
 
 public class Startup

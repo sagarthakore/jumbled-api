@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace Jumbled_API.Controllers;
+﻿namespace Jumbled_API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
