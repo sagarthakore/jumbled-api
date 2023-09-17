@@ -18,6 +18,6 @@ public class CrosswordController : ControllerBase
         {
             return BadRequest();
         }
-        return Ok(_jumbledService.GetWordleGuess(word, exclude, include));
+        return Ok(_jumbledService.GetWordGuess(word, exclude, include));
     }
 }

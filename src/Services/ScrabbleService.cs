@@ -13,46 +13,17 @@ public class ScrabbleService : IScrabbleService
 
     public ScrabbleService()
     {
-        scrabbleWords = File.ReadAllLines("Resources/scrabblewords.txt").ToList();
+        scrabbleWords = File.ReadLines("Resources/scrabblewords.txt").ToList();
         letterScores = GetLetterScores();
     }
 
     public List<ScrabbleResult> GetScrabbleWordsWithScores(string rack)
     {
-        List<ScrabbleResult> scrabbleResult = new();
-
-        foreach (string word in scrabbleWords.Where(word => word.Length <= rack.Length))
-        {
-            bool candidate = true;
-            List<char> rackLetters = rack.ToUpper().ToList();
-
-            foreach (char letter in word)
-            {
-                if (!rackLetters.Contains(letter))
-                {
-                    candidate = false;
-                    break;
-                }
-                else
-                {
-                    rackLetters.Remove(letter);
-                }
-            }
-
-            if (candidate)
-            {
-                int total = 0;
-
-                foreach (char letter in word)
-                {
-                    total += letterScores[letter];
-                }
-
-                scrabbleResult.Add(new ScrabbleResult { Word = word, Score = total });
-            }
-        }
-
-        return scrabbleResult.OrderByDescending(sr => sr.Score).ToList();
+        return scrabbleWords
+            .Where(word => word.Length <= rack.Length && word.All(c => rack.ToUpper().Count(l => l == c) >= word.Count(l => l == c)))
+            .Select(word => new ScrabbleResult { Word = word, Score = word.Sum(c => letterScores[c]) })
+            .OrderByDescending(sr => sr.Score)
+            .ToList();
     }
 
     private static Dictionary<char, int> GetLetterScores()
