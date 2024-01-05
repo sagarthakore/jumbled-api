@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using Jumbled_API.Services.Interfaces;
-using System.Linq;
-
 namespace Jumbled_API.Services;
 
 public class JumbledService : IJumbledService
@@ -28,11 +22,11 @@ public class JumbledService : IJumbledService
         if (guess.Length == 0) return new List<string>();
 
         var result = new List<string>();
-        List<string> filteredWords = words.Where(word => word.Length == guess.Length)?.ToList();
+        HashSet<string> filteredWords = new(words.Where(word => word.Length == guess.Length));
 
         if (!string.IsNullOrEmpty(exclude))
         {
-            foreach (string word in words.Where(word => word.Length == guess.Length)?.ToList())
+            foreach (string word in words.Where(word => word.Length == guess.Length))
             {
                 bool candidate = false;
                 for (int i = 0; i < exclude.Length; i++)
@@ -44,13 +38,13 @@ public class JumbledService : IJumbledService
                     }
                 }
 
-                if (candidate) filteredWords.RemoveAll(w => w == word);
+                if (candidate) filteredWords.Remove(word);
             }
         }
 
         if (!string.IsNullOrEmpty(include) && include.Length == guess.Length)
         {
-            foreach (string word in words.Where(word => word.Length == guess.Length)?.ToList())
+            foreach (string word in words.Where(word => word.Length == guess.Length))
             {
                 bool candidate = false;
                 for (int i = 0; i < include.Length; i++)
@@ -62,7 +56,7 @@ public class JumbledService : IJumbledService
                     }
                 }
 
-                if (candidate) filteredWords.RemoveAll(w => w == word);
+                if (candidate) filteredWords.Remove(word);
             }
         }
 
@@ -86,18 +80,18 @@ public class JumbledService : IJumbledService
 
     private Dictionary<string, HashSet<string>> CreateDictionary()
     {
-        Dictionary<string, HashSet<string>> dictionary = new();
+        Dictionary<string, HashSet<string>> dict = new();
         foreach (string word in words)
         {
             string wordKey = GenerateWordKey(word);
-            if (!dictionary.TryGetValue(wordKey, out HashSet<string> wordList))
+            if (!dict.TryGetValue(wordKey, out HashSet<string> wordList))
             {
                 wordList = new HashSet<string>();
-                dictionary[wordKey] = wordList;
+                dict[wordKey] = wordList;
             }
             wordList.Add(word);
         }
-        return dictionary;
+        return dict;
     }
 
     private static string GenerateWordKey(string inputString)
