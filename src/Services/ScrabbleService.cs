@@ -1,9 +1,3 @@
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Jumbled_API.Models;
-using Jumbled_API.Services.Interfaces;
-
 namespace Jumbled_API.Services;
 
 public class ScrabbleService : IScrabbleService
