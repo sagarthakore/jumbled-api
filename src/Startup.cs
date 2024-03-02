@@ -1,13 +1,10 @@
+using Microsoft.AspNetCore.Http;
+
 namespace Jumbled_API;
 
-public class Startup
+public class Startup(IConfiguration configuration)
 {
-    public Startup(IConfiguration configuration)
-    {
-        Configuration = configuration;
-    }
-
-    public IConfiguration Configuration { get; }
+    public IConfiguration Configuration { get; } = configuration;
 
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
@@ -29,9 +26,9 @@ public class Startup
 
         app.UseRouting();
 
-        app.UseCors(x => x.AllowAnyOrigin());
+        app.UseEndpoints(endpoints => endpoints.MapGet("/", async context => await context.Response.WriteAsync("Jumbled API")));
 
-        app.UseAuthorization();
+        app.UseCors(x => x.AllowAnyOrigin());
 
         app.UseEndpoints(endpoints => endpoints.MapControllers());
     }
