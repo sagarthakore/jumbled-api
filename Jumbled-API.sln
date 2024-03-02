@@ -1,11 +1,11 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JUMBLED-API", "src\JUMBLED-API.csproj", "{20A94416-F315-41D1-AD86-D957045114CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JUMBLED-API", "src\JUMBLED-API.csproj", "{20A94416-F315-41D1-AD86-D957045114CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JUMBLED-API-TESTS", "tests\JUMBLED-API-TESTS.csproj", "{18648A76-F742-4434-AB2A-08CBB06D6472}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JUMBLED-API-TESTS", "tests\JUMBLED-API-TESTS.csproj", "{18648A76-F742-4434-AB2A-08CBB06D6472}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
