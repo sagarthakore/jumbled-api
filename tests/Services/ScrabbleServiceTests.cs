@@ -2,7 +2,7 @@ namespace Jumbled_API_TESTS;
 
 public class ScrabbleServiceTests
 {
-    private readonly IScrabbleService _scrabbleService;
+    private readonly ScrabbleService _scrabbleService;
 
     public ScrabbleServiceTests()
     {

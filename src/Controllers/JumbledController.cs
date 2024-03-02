@@ -2,14 +2,9 @@ namespace Jumbled_API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class JumbledController : ControllerBase
+public class JumbledController(IJumbledService jumbledService) : ControllerBase
 {
-    private readonly IJumbledService _jumbledService;
-
-    public JumbledController(IJumbledService jumbledService)
-    {
-        _jumbledService = jumbledService;
-    }
+    private readonly IJumbledService _jumbledService = jumbledService;
 
     [HttpGet]
     public IActionResult Get(string word)

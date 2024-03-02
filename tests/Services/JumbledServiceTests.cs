@@ -2,7 +2,7 @@ namespace Jumbled_API_TESTS;
 
 public class JumbledServiceTests
 {
-    private readonly IJumbledService _jumbledService;
+    private readonly JumbledService _jumbledService;
 
     public JumbledServiceTests()
     {
@@ -14,14 +14,14 @@ public class JumbledServiceTests
     public void GetDictionaryWords_WordsExist_GetWords(string value)
     {
         HashSet<string> result = _jumbledService.GetDictionaryWords(value);
-        HashSet<string> expected = new()
-        {
+        HashSet<string> expected =
+        [
             "danger",
             "gander",
             "garden",
             "grande",
             "ranged"
-        };
+        ];
 
         Assert.Equal(expected, result);
     }
@@ -31,13 +31,13 @@ public class JumbledServiceTests
     public void GetWordGuessWord_WordsExist_GetWords(string value, string exclude, string include)
     {
         List<string> result = _jumbledService.GetWordGuess(value, exclude, include);
-        List<string> expected = new()
-        {
+        List<string> expected =
+        [
             "fancywork",
             "fieldwork",
             "framework",
             "frostwork"
-        };
+        ];
 
         Assert.Equal(expected, result);
     }
@@ -47,11 +47,11 @@ public class JumbledServiceTests
     public void GetWordGuessWordExcludeLetters_WordsExist_GetWords(string value, string exclude, string include)
     {
         List<string> result = _jumbledService.GetWordGuess(value, exclude, include);
-        List<string> expected = new()
-        {
+        List<string> expected =
+        [
             "crick",
             "prick"
-        };
+        ];
 
         Assert.Equal(expected, result);
     }
@@ -61,10 +61,10 @@ public class JumbledServiceTests
     public void GetWordGuessWordIncludeLetters_WordsExist_GetWords(string value, string exclude, string include)
     {
         List<string> result = _jumbledService.GetWordGuess(value, exclude, include);
-        List<string> expected = new()
-        {
+        List<string> expected =
+        [
             "brick"
-        };
+        ];
 
         Assert.Equal(expected, result);
     }
@@ -74,14 +74,14 @@ public class JumbledServiceTests
     public void GetWordGuessWordIncludeExcludeLetters_WordsExist_GetWords(string value, string exclude, string include)
     {
         List<string> result = _jumbledService.GetWordGuess(value, exclude, include);
-        List<string> expected = new()
-        {
+        List<string> expected =
+        [
             "robes",
             "robin",
             "roble",
             "robot",
             "sober"
-        };
+        ];
 
         Assert.Equal(expected, result);
     }

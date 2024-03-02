@@ -13,11 +13,10 @@ public class ScrabbleService : IScrabbleService
 
     public List<ScrabbleResult> GetScrabbleWordsWithScores(string rack)
     {
-        return scrabbleWords
+        return [.. scrabbleWords
             .Where(word => word.Length <= rack.Length && word.All(c => rack.ToUpper().Count(l => l == c) >= word.Count(l => l == c)))
             .Select(word => new ScrabbleResult { Word = word, Score = word.Sum(c => letterScores[c]) })
-            .OrderByDescending(sr => sr.Score)
-            .ToList();
+            .OrderByDescending(sr => sr.Score)];
     }
 
     private static Dictionary<char, int> GetLetterScores()

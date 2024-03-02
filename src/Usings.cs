@@ -4,6 +4,7 @@ global using System.Linq;
 global using Jumbled_API.Models;
 global using Jumbled_API.Services;
 global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Http;
 global using System.Collections.Generic;
 global using Microsoft.AspNetCore.Hosting;
 global using Microsoft.Extensions.Hosting;

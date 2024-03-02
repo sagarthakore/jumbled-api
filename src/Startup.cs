@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Http;
-
 namespace Jumbled_API;
 
 public class Startup(IConfiguration configuration)

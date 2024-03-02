@@ -2,14 +2,9 @@ namespace Jumbled_API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class CrosswordController : ControllerBase
+public class CrosswordController(IJumbledService jumbledService) : ControllerBase
 {
-    private readonly IJumbledService _jumbledService;
-
-    public CrosswordController(IJumbledService jumbledService)
-    {
-        _jumbledService = jumbledService;
-    }
+    private readonly IJumbledService _jumbledService = jumbledService;
 
     [HttpGet]
     public IActionResult Get([FromQuery]string word, [FromQuery]string exclude, [FromQuery]string include)

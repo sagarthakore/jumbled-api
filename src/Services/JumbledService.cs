@@ -7,19 +7,19 @@ public class JumbledService : IJumbledService
 
     public JumbledService()
     {
-        words = File.ReadAllLines("Resources/words_en.txt").ToList();
+        words = [.. File.ReadAllLines("Resources/words_en.txt")];
         dictionary = CreateDictionary();
     }
 
     public HashSet<string> GetDictionaryWords(string jumbledWord)
     {
         string jumbledWordKey = GenerateWordKey(jumbledWord.ToLower());
-        return dictionary.ContainsKey(jumbledWordKey) ? dictionary[jumbledWordKey] : new HashSet<string>();
+        return dictionary.TryGetValue(jumbledWordKey, out HashSet<string> value) ? value : [];
     }
 
     public List<string> GetWordGuess(string guess, string exclude, string include)
     {
-        if (guess.Length == 0) return new List<string>();
+        if (guess.Length == 0) return [];
 
         var result = new List<string>();
         HashSet<string> filteredWords = new(words.Where(word => word.Length == guess.Length));
@@ -80,13 +80,13 @@ public class JumbledService : IJumbledService
 
     private Dictionary<string, HashSet<string>> CreateDictionary()
     {
-        Dictionary<string, HashSet<string>> dict = new();
+        Dictionary<string, HashSet<string>> dict = [];
         foreach (string word in words)
         {
             string wordKey = GenerateWordKey(word);
             if (!dict.TryGetValue(wordKey, out HashSet<string> wordList))
             {
-                wordList = new HashSet<string>();
+                wordList = [];
                 dict[wordKey] = wordList;
             }
             wordList.Add(word);
