@@ -13,8 +13,17 @@ public class ScrabbleService : IScrabbleService
 
     public List<ScrabbleResult> GetScrabbleWordsWithScores(string rack)
     {
+        var rackLetterCounts = new Dictionary<char, int>();
+        foreach (char c in rack.ToUpper())
+        {
+            if (rackLetterCounts.TryGetValue(c, out int value))
+                rackLetterCounts[c] = ++value;
+            else
+                rackLetterCounts[c] = 1;
+        }
+
         return [.. scrabbleWords
-            .Where(word => word.Length <= rack.Length && word.All(c => rack.ToUpper().Count(l => l == c) >= word.Count(l => l == c)))
+            .Where(word => word.Length <= rack.Length && word.All(c => rackLetterCounts.ContainsKey(c) && rackLetterCounts[c] >= word.Count(l => l == c)))
             .Select(word => new ScrabbleResult { Word = word, Score = word.Sum(c => letterScores[c]) })
             .OrderByDescending(sr => sr.Score)];
     }
